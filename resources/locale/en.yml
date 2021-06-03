@@ -1,0 +1,16 @@
+flamarkt-identity:
+    backoffice:
+        settings:
+            displayNameFormat: Display name format
+    forum:
+        settings:
+            firstname: First name
+            lastname: Last name
+            birthday: Birthday
+            addressStreet: Street
+            addressNumber: Number
+            addressCity: City
+            addressZip: ZIP
+            addressState: State
+            addressCountry: Country
+            submit: Save

@@ -1,0 +1,48 @@
+{
+    "name": "flamarkt/identity",
+    "description": "Customer attributes for Flamarkt.",
+    "keywords": [
+        "flarum",
+        "flamarkt",
+        "marketplace",
+        "ecommerce",
+        "name",
+        "address"
+    ],
+    "type": "flarum-extension",
+    "license": "MIT",
+    "require": {
+        "flarum/core": "^1.0",
+        "flamarkt/core": "^0.1.0"
+    },
+    "authors": [
+        {
+            "name": "Flamarkt",
+            "homepage": "https://flamarkt.org/"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/flamarkt/identity/issues",
+        "source": "https://github.com/flamarkt/identity"
+    },
+    "autoload": {
+        "psr-4": {
+            "Flamarkt\\Identity\\": "src/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Identity",
+            "category": "flamarkt",
+            "icon": {
+                "name": "fas fa-user",
+                "backgroundColor": "#266a13",
+                "color": "#fff"
+            }
+        },
+        "flamarkt-backoffice": {
+            "showInBackoffice": true,
+            "hideFromAdmin": true
+        }
+    }
+}
