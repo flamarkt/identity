@@ -2,8 +2,8 @@ flamarkt-identity:
     backoffice:
         settings:
             displayNameFormat: Display name format
-    forum:
-        settings:
+    lib:
+        field:
             firstname: First name
             lastname: Last name
             birthday: Birthday

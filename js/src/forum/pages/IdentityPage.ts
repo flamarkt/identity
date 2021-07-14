@@ -1,15 +1,16 @@
+import {Vnode} from 'mithril';
 import app from 'flarum/forum/app';
 import AbstractAccountPage from 'flamarkt/core/forum/pages/AbstractAccountPage';
 import Button from 'flarum/common/components/Button';
-import IdentityFieldsState from '../states/IdentityFieldsState';
-import IdentityFields from "../components/IdentityFields";
+import IdentityFieldsState from '../../common/states/IdentityFieldsState';
+import IdentityFields from '../components/IdentityFields';
 
 export default class IdentityPage extends AbstractAccountPage {
     state: IdentityFieldsState = new IdentityFieldsState();
     dirty: boolean = false;
     saving: boolean = false;
 
-    oninit(vnode) {
+    oninit(vnode: Vnode) {
         super.oninit(vnode);
 
         if (app.session.user) {
@@ -50,7 +51,7 @@ export default class IdentityPage extends AbstractAccountPage {
         };
     }
 
-    onsubmit(event) {
+    onsubmit(event: Event) {
         event.preventDefault();
 
         this.saving = true;
