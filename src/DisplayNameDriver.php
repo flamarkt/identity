@@ -19,8 +19,14 @@ class DisplayNameDriver implements DriverInterface
     {
         $format = $this->settings->get('flamarkt-identity.displayNameFormat') ?: '{firstname} {lastname}';
 
-        return preg_replace_callback('~\{([^}]+)}~', function ($matches) use ($user) {
+        $name = preg_replace_callback('~\{([^}]+)}~', function ($matches) use ($user) {
             return $user->{$matches[1]};
         }, $format);
+
+        if (empty(trim($name))) {
+            return $user->username;
+        }
+
+        return $name;
     }
 }
