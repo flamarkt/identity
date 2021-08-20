@@ -46,10 +46,15 @@ app.initializers.add('flamarkt-identity', () => {
         });
     });
 
-    override(UserShowPage.prototype, 'data', function (this: UserShowPage, original: any) {
-        return {
-            ...original(),
-            ...this.identity.data(),
-        };
+    extend(UserShowPage.prototype, 'data', function (this: UserShowPage, data: any) {
+        const identityData = this.identity.data();
+
+        // Only add keys that were modified, that way "required" field that aren't filled won't be validated
+        // So we can edit other parts of the user profile without having to fill every missing field
+        Object.keys(identityData).forEach(key => {
+            if (identityData[key] !== (this.user[key]() || '')) {
+                data[key] = identityData[key];
+            }
+        });
     });
 });
