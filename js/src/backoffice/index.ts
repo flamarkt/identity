@@ -1,7 +1,7 @@
 import {extend, override} from 'flarum/common/extend';
 import ItemList from 'flarum/common/utils/ItemList';
-import UserList from 'flamarkt/core/backoffice/components/UserList';
-import UserShowPage from 'flamarkt/core/backoffice/pages/UserShowPage';
+import UserList from 'flamarkt/backoffice/backoffice/components/UserList';
+import UserShowPage from 'flamarkt/backoffice/backoffice/pages/UserShowPage';
 import User from 'flarum/common/models/User';
 import identityFields from '../common/identityFields';
 import IdentityFieldsState from '../common/states/IdentityFieldsState';

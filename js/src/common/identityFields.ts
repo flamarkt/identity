@@ -1,7 +1,8 @@
+import {Children} from 'mithril';
 import ItemList from 'flarum/common/utils/ItemList';
 import IdentityFieldsState from './states/IdentityFieldsState';
 
-export default function (items: ItemList, state: IdentityFieldsState, onchange: () => void): ItemList {
+export default function (items: ItemList<Children>, state: IdentityFieldsState, onchange: () => void): ItemList<Children> {
     items.add('firstname', m('.Form-group', [
         m('label', {
             for: 'settings-firstname',

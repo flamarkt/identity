@@ -1,3 +1,4 @@
+import {Children} from 'mithril';
 import Component, {ComponentAttrs} from 'flarum/common/Component';
 import ItemList from 'flarum/common/utils/ItemList';
 import IdentityFieldsState from '../../common/states/IdentityFieldsState';
@@ -13,9 +14,9 @@ export default class IdentityFields extends Component<IdentityFieldsAttrs> {
         return this.fields().toArray();
     }
 
-    fields(): ItemList {
+    fields(): ItemList<Children> {
         const {state, onchange} = this.attrs;
 
-        return identityFields(new ItemList(), state, onchange);
+        return identityFields(new ItemList<Children>(), state, onchange);
     }
 }
