@@ -1,3 +1,4 @@
+import app from 'flarum/common/app';
 import {Children} from 'mithril';
 import ItemList from 'flarum/common/utils/ItemList';
 import IdentityFieldsState from './states/IdentityFieldsState';

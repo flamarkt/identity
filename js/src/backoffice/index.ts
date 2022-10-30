@@ -1,5 +1,5 @@
+import app from 'flamarkt/backoffice/backoffice/app';
 import {extend, override} from 'flarum/common/extend';
-import ItemList from 'flarum/common/utils/ItemList';
 import UserList from 'flamarkt/backoffice/backoffice/components/UserList';
 import UserShowPage from 'flamarkt/backoffice/backoffice/pages/UserShowPage';
 import User from 'flarum/common/models/User';
@@ -12,23 +12,29 @@ app.initializers.add('flamarkt-identity', () => {
 
     app.extensionData.for('flamarkt-identity')
         .registerSetting({
+            setting: 'flamarkt-identity.searchable',
+            type: 'switch',
+            label: app.translator.trans('flamarkt-identity.backoffice.settings.searchable'),
+            help: app.translator.trans('flamarkt-identity.backoffice.settings.searchableHelp'),
+        })
+        .registerSetting({
             setting: 'flamarkt-identity.displayNameFormat',
             type: 'text',
             label: app.translator.trans('flamarkt-identity.backoffice.settings.displayNameFormat'),
             placeholder: '{firstname} {lastname}',
         });
 
-    extend(UserList.prototype, 'head', function (columns: ItemList) {
+    extend(UserList.prototype, 'head', function (columns) {
         columns.add('firstname', m('th', 'First name'));
         columns.add('lastname', m('th', 'Last name'));
     });
 
-    extend(UserList.prototype, 'columns', function (columns: ItemList, user: User) {
+    extend(UserList.prototype, 'columns', function (columns, user) {
         columns.add('firstname', m('td', user.firstname()));
         columns.add('lastname', m('td', user.lastname()));
     });
 
-    override(UserShowPage.prototype, 'oninit', function (this: UserShowPage, original: any, ...args: any) {
+    override(UserShowPage.prototype, 'oninit', function (original: any, ...args: any) {
         this.identity = new IdentityFieldsState();
 
         // We need to use override because we must initialise this.identity before this.show() is called
@@ -36,17 +42,17 @@ app.initializers.add('flamarkt-identity', () => {
         original(...args);
     });
 
-    extend(UserShowPage.prototype, 'show', function (this: UserShowPage, returnValue: any, user: User) {
+    extend(UserShowPage.prototype, 'show', function (returnValue: any, user: User) {
         this.identity.valuesFromUser(user);
     });
 
-    extend(UserShowPage.prototype, 'fields', function (this: UserShowPage, fields: ItemList) {
+    extend(UserShowPage.prototype, 'fields', function (fields) {
         identityFields(fields, this.identity, () => {
             this.dirty = true;
         });
     });
 
-    extend(UserShowPage.prototype, 'data', function (this: UserShowPage, data: any) {
+    extend(UserShowPage.prototype, 'data', function (data: any) {
         const identityData = this.identity.data();
 
         // Only add keys that were modified, that way "required" field that aren't filled won't be validated

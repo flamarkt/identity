@@ -6,7 +6,7 @@ declare module 'flarum/forum/components/SignUpModal' {
     }
 }
 
-declare module 'flamarkt/core/backoffice/pages/UserShowPage' {
+declare module 'flamarkt/backoffice/backoffice/pages/UserShowPage' {
     export default interface UserShowPage {
         identity: IdentityFieldsState
     }
