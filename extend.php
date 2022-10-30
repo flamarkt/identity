@@ -3,9 +3,11 @@
 namespace Flamarkt\Identity;
 
 use ClarkWinkelmann\Scout\Extend\Scout;
+use Flamarkt\Identity\Event;
 use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Extend;
 use Flarum\Settings\SettingsRepositoryInterface;
+use Flarum\User\Event\EmailChanged;
 use Flarum\User\Event\Saving;
 use Flarum\User\User;
 
@@ -31,6 +33,19 @@ $extenders = [
 
 if (class_exists(Scout::class)) {
     $extenders[] = (new Scout(User::class))
+        ->listenSaved(EmailChanged::class, function (EmailChanged $event) {
+            return $event->user;
+        })
+        ->listenSaved(Event\FirstnameChanged::class, function (Event\FirstnameChanged $event) {
+            return $event->user;
+        })
+        ->listenSaved(Event\LastnameChanged::class, function (Event\LastnameChanged $event) {
+            return $event->user;
+        })
+        ->listenSaved(Event\BirthdayChanged::class, function (Event\BirthdayChanged $event) {
+            return $event->user;
+        })
+        // TODO: other events
         ->attributes(function (User $user): array {
             if (!resolve(SettingsRepositoryInterface::class)->get('flamarkt-identity.searchable')) {
                 return [];
