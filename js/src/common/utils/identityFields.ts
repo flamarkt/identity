@@ -1,10 +1,15 @@
 import app from 'flarum/common/app';
 import {Children} from 'mithril';
 import ItemList from 'flarum/common/utils/ItemList';
-import IdentityFieldsState from './states/IdentityFieldsState';
+import IdentityFieldsState from '../states/IdentityFieldsState';
 
-export default function (items: ItemList<Children>, state: IdentityFieldsState, onchange: () => void): ItemList<Children> {
-    items.add('firstname', m('.Form-group', [
+export interface IdentityFieldsOptions {
+    onchange?: () => void
+    disabled?: boolean
+}
+
+export default function (items: ItemList<Children>, state: IdentityFieldsState, options: IdentityFieldsOptions = {}): ItemList<Children> {
+    items.add('flamarkt-identity-firstname', m('.Form-group', [
         m('label', {
             for: 'settings-firstname',
         }, app.translator.trans('flamarkt-identity.lib.field.firstname')),
@@ -14,12 +19,13 @@ export default function (items: ItemList<Children>, state: IdentityFieldsState, 
             value: state.firstname,
             oninput: (event: Event) => {
                 state.firstname = (event.target as HTMLInputElement).value;
-                onchange();
+                options.onchange?.();
             },
+            disabled: options.disabled,
         }),
     ]));
 
-    items.add('lastname', m('.Form-group', [
+    items.add('flamarkt-identity-lastname', m('.Form-group', [
         m('label', {
             for: 'settings-lastname',
         }, app.translator.trans('flamarkt-identity.lib.field.lastname')),
@@ -29,12 +35,13 @@ export default function (items: ItemList<Children>, state: IdentityFieldsState, 
             value: state.lastname,
             oninput: (event: Event) => {
                 state.lastname = (event.target as HTMLInputElement).value;
-                onchange();
+                options.onchange?.();
             },
+            disabled: options.disabled,
         }),
     ]));
 
-    items.add('birthday', m('.Form-group', [
+    items.add('flamarkt-identity-birthday', m('.Form-group', [
         m('label', {
             for: 'settings-birthday',
         }, app.translator.trans('flamarkt-identity.lib.field.birthday')),
@@ -44,12 +51,13 @@ export default function (items: ItemList<Children>, state: IdentityFieldsState, 
             value: state.birthday,
             oninput: (event: Event) => {
                 state.birthday = (event.target as HTMLInputElement).value;
-                onchange();
+                options.onchange?.();
             },
+            disabled: options.disabled,
         }),
     ]));
 
-    items.add('addressStreet', m('.Form-group', [
+    items.add('flamarkt-identity-addressStreet', m('.Form-group', [
         m('label', {
             for: 'settings-addressStreet',
         }, app.translator.trans('flamarkt-identity.lib.field.addressStreet')),
@@ -59,12 +67,13 @@ export default function (items: ItemList<Children>, state: IdentityFieldsState, 
             value: state.addressStreet,
             oninput: (event: Event) => {
                 state.addressStreet = (event.target as HTMLInputElement).value;
-                onchange();
+                options.onchange?.();
             },
+            disabled: options.disabled,
         }),
     ]));
 
-    items.add('addressNumber', m('.Form-group', [
+    items.add('flamarkt-identity-addressNumber', m('.Form-group', [
         m('label', {
             for: 'settings-addressNumber',
         }, app.translator.trans('flamarkt-identity.lib.field.addressNumber')),
@@ -74,12 +83,13 @@ export default function (items: ItemList<Children>, state: IdentityFieldsState, 
             value: state.addressNumber,
             oninput: (event: Event) => {
                 state.addressNumber = (event.target as HTMLInputElement).value;
-                onchange();
+                options.onchange?.();
             },
+            disabled: options.disabled,
         }),
     ]));
 
-    items.add('addressCity', m('.Form-group', [
+    items.add('flamarkt-identity-addressCity', m('.Form-group', [
         m('label', {
             for: 'settings-addressCity',
         }, app.translator.trans('flamarkt-identity.lib.field.addressCity')),
@@ -89,12 +99,13 @@ export default function (items: ItemList<Children>, state: IdentityFieldsState, 
             value: state.addressCity,
             oninput: (event: Event) => {
                 state.addressCity = (event.target as HTMLInputElement).value;
-                onchange();
+                options.onchange?.();
             },
+            disabled: options.disabled,
         }),
     ]));
 
-    items.add('addressZip', m('.Form-group', [
+    items.add('flamarkt-identity-addressZip', m('.Form-group', [
         m('label', {
             for: 'settings-addressZip',
         }, app.translator.trans('flamarkt-identity.lib.field.addressZip')),
@@ -104,12 +115,13 @@ export default function (items: ItemList<Children>, state: IdentityFieldsState, 
             value: state.addressZip,
             oninput: (event: Event) => {
                 state.addressZip = (event.target as HTMLInputElement).value;
-                onchange();
+                options.onchange?.();
             },
+            disabled: options.disabled,
         }),
     ]));
 
-    items.add('addressState', m('.Form-group', [
+    items.add('flamarkt-identity-addressState', m('.Form-group', [
         m('label', {
             for: 'settings-addressState',
         }, app.translator.trans('flamarkt-identity.lib.field.addressState')),
@@ -119,12 +131,13 @@ export default function (items: ItemList<Children>, state: IdentityFieldsState, 
             value: state.addressState,
             oninput: (event: Event) => {
                 state.addressState = (event.target as HTMLInputElement).value;
-                onchange();
+                options.onchange?.();
             },
+            disabled: options.disabled,
         }),
     ]));
 
-    items.add('addressCountry', m('.Form-group', [
+    items.add('flamarkt-identity-addressCountry', m('.Form-group', [
         m('label', {
             for: 'settings-addressCountry',
         }, app.translator.trans('flamarkt-identity.lib.field.addressCountry')),
@@ -134,8 +147,9 @@ export default function (items: ItemList<Children>, state: IdentityFieldsState, 
             value: state.addressCountry,
             oninput: (event: Event) => {
                 state.addressCountry = (event.target as HTMLInputElement).value;
-                onchange();
+                options.onchange?.();
             },
+            disabled: options.disabled,
         }),
     ]));
 

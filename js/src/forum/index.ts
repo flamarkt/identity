@@ -1,12 +1,19 @@
 import app from 'flarum/forum/app';
 import {extend, override} from 'flarum/common/extend';
 import LinkButton from 'flarum/common/components/LinkButton';
-import AccountControls from 'flamarkt/core/forum/utils/AccountControls';
-import IdentityPage from './pages/IdentityPage';
 import SignUpModal from 'flarum/forum/components/SignUpModal';
-import IdentityFields from './components/IdentityFields';
+import AccountControls from 'flamarkt/core/forum/utils/AccountControls';
+import {common} from '../common/compat';
+import {forum} from './compat';
+import IdentityPage from './pages/IdentityPage';
 import IdentityFieldsState from '../common/states/IdentityFieldsState';
 import addUserAttributes from '../common/addUserAttributes';
+import identityFields from '../common/utils/identityFields';
+
+export {
+    common,
+    forum,
+};
 
 app.initializers.add('flamarkt-identity', () => {
     addUserAttributes();
@@ -19,7 +26,7 @@ app.initializers.add('flamarkt-identity', () => {
     extend(AccountControls, 'controls', function (items) {
         items.add('identity', LinkButton.component({
             href: app.route('flamarkt.account.identity'),
-        }, 'Identity'));
+        }, app.translator.trans('flamarkt-identity.forum.account.nav')));
     });
 
     extend(SignUpModal.prototype, 'oninit', function () {
@@ -27,12 +34,9 @@ app.initializers.add('flamarkt-identity', () => {
     });
 
     extend(SignUpModal.prototype, 'fields', function (fields) {
-        fields.add('flamarkt-identity', IdentityFields.component({
-            state: this.flamarktIdentityState,
-            onchange() {
-                //
-            },
-        }));
+        identityFields(fields, this.flamarktIdentityState, {
+            disabled: this.loading,
+        });
     });
 
     override(SignUpModal.prototype, 'submitData', function (original: any) {

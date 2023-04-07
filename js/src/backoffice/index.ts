@@ -3,9 +3,14 @@ import {extend, override} from 'flarum/common/extend';
 import UserList from 'flamarkt/backoffice/backoffice/components/UserList';
 import UserShowPage from 'flamarkt/backoffice/backoffice/pages/UserShowPage';
 import User from 'flarum/common/models/User';
-import identityFields from '../common/identityFields';
+import {common} from '../common/compat';
+import identityFields from '../common/utils/identityFields';
 import IdentityFieldsState from '../common/states/IdentityFieldsState';
 import addUserAttributes from '../common/addUserAttributes';
+
+export {
+    common,
+};
 
 app.initializers.add('flamarkt-identity', () => {
     addUserAttributes();
@@ -47,8 +52,11 @@ app.initializers.add('flamarkt-identity', () => {
     });
 
     extend(UserShowPage.prototype, 'fields', function (fields) {
-        identityFields(fields, this.identity, () => {
-            this.dirty = true;
+        identityFields(fields, this.identity, {
+            onchange: () => {
+                this.dirty = true;
+            },
+            disabled: this.saving,
         });
     });
 

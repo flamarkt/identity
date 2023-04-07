@@ -7,6 +7,12 @@ flamarkt-identity:
                 This is potentially dangerous!
                 Any actor with access to list users permission will be able to filter the users they can see by any of the fields even if they don't see the fields!
             displayNameFormat: Display name format
+    forum:
+        account:
+            headingTitle: Identity
+            browserTitle: Identity
+            nav: Identity
+            submit: Save
     lib:
         field:
             firstname: First name

@@ -8,6 +8,7 @@
         "shims.d.ts"
     ],
     "compilerOptions": {
+        "declarationDir": "./dist-typings",
         "baseUrl": ".",
         "paths": {
             "flamarkt/backoffice/*": [
