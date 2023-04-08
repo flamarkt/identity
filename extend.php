@@ -29,6 +29,9 @@ $extenders = [
 
     (new Extend\ApiSerializer(UserSerializer::class))
         ->attributes(UserAttributes::class),
+
+    (new Extend\Policy())
+        ->modelPolicy(User::class, Access\UserPolicy::class),
 ];
 
 if (class_exists(Scout::class)) {
